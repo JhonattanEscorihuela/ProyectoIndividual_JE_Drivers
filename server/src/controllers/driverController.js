@@ -1,28 +1,44 @@
 let axios = require("axios");
 let url = "http://localhost:5000/drivers/";
 let imagenPorDefecto = "https://img.redbull.com/images/c_fill,w_520,h_580,g_auto,f_auto,q_auto/redbullcom/2023/3/2/hxtnynke2onx5c3lvwnb/rbr-driverlayer-sergio.jpg";
-let driversData = [];
+
 let { Driver, Team } = require('../db.js');
+const { Op } = require("sequelize");
+
 
 async function findTeamByName(teamName) {
     const team = await Team.findOne({ where: { nombre: teamName } });
     return team;
 }
 
+let infoCleaner = (arr) => {
+    return arr.map(driver => ({
+        id: driver.id,
+        referencia: driver.driverRef,
+        number: driver.number,
+        code: driver.code,
+        nombre: driver.name.forename,
+        apellido: driver.name.surname,
+        imagen: driver.image?.url || imagenPorDefecto,
+        fecha_de_nacimiento: driver.dob,
+        nacionalidad: driver.nationality,
+        teams: driver.teams,
+        descripcion: driver.description,
+        created: false,
+    }));
+
+}
+
 let driverController = {
     getAllDrivers: async (req, res) => {
         try {
+            let dbDrivers = await Driver.findAll();
             let apiDrivers = await axios.get(url);
-            apiDrivers = apiDrivers.data;
-            let driversConImagen = apiDrivers.map(driver => ({
-                ...driver,
-                image: {
-                    url: driver.image?.url || imagenPorDefecto
-                }
-            }));
 
-            driversData = driversConImagen;
-            res.json(driversConImagen);
+            apiDrivers = infoCleaner(apiDrivers.data);
+            driversApiDB = [...apiDrivers, ...dbDrivers]
+
+            res.json(driversApiDB);
         } catch (error) {
             console.error(error);
             res.status(500).json({ error: "Hubo un error al obtener los drivers." });
@@ -30,27 +46,42 @@ let driverController = {
     },
     getDriverById: async (req, res) => {
         let { idDriver } = req.params;
-        idDriver = parseInt(idDriver);
-        try {
-            let driver = driversData.find(driver => driver.id === idDriver);
+        let source = isNaN(idDriver) ? "bdd" : "api";
 
-            if (driver) {
-                res.json(driver);
+        try {
+            if (source === "api") {
+                let apiDriver = await axios.get(url + idDriver);
+                apiDriver = infoCleaner([apiDriver.data]);
+                res.json(apiDriver);
             } else {
-                res.status(404).json({ error: "Conductor no encontrado" });
+                let driver = await Driver.findByPk(idDriver);
+                res.status(200).json(driver);
             }
         } catch (error) {
-            console.error(error);
-            res.status(500).json({ error: "Hubo un error al obtener el detalle del conductor" });
+            res.status(500).json({ error: "Driver no encontrado" });
         }
     },
     getDriversByName: async (req, res) => {
-        let { "name.forename": name } = req.query;
+
+        let { nombre } = req.query;
+        console.log(nombre);
         try {
-            let matchingDrivers = driversData.filter(driver => {
-                const driverName = driver.name.forename.toLowerCase();
-                return driverName.includes(name.toLowerCase());
+
+            let usersApi = await axios.get(url);
+            usersApi = infoCleaner(usersApi.data);
+            let usersApiFilter = usersApi.filter(driver => {
+                const driverName = driver.nombre.toLowerCase();
+                return driverName.includes(nombre.toLowerCase());
             });
+
+            let usersDB = await Driver.findAll({
+                where: {
+                    nombre: {
+                        [Op.iLike]: `%${nombre}%` // Buscar nombres que contengan el nombre proporcionado
+                    }
+                }
+            });
+            let matchingDrivers = [...usersApiFilter, ...usersDB];
 
             let first15Drivers = matchingDrivers.slice(0, 15);
 
@@ -68,16 +99,6 @@ let driverController = {
     postDrivers: async (req, res) => {
         let { nombre, apellido, descripcion, imagen, nacionalidad, fecha_de_nacimiento, teams } = req.body;
         try {
-            let teamUUID = null;
-
-            // Si el cliente proporcionó un nombre de equipo, busca el UUID correspondiente
-            if (teams) {
-                const team = await findTeamByName(teams);
-                if (team) {
-                    teamUUID = team.team_id;
-                }
-            }
-
             let nuevoDriver = await Driver.create({
                 nombre,
                 apellido,
@@ -85,20 +106,22 @@ let driverController = {
                 imagen,
                 nacionalidad,
                 fecha_de_nacimiento,
-                teams,
             });
-
-            if (teamUUID) {
-                // Asocia el equipo al conductor
-                await nuevoDriver.addTeams([teamUUID]);
+    
+            if (teams) {
+                const teamUUID = await findTeamByName(teams);
+                if (teamUUID) {
+                    await nuevoDriver.addTeams([teamUUID]);
+                }
             }
-
+    
             res.status(201).json(nuevoDriver);
         } catch (error) {
             console.error(error);
             res.status(500).json({ error: 'Hubo un error al crear el driver.' });
         }
     }
+    
 }
 
 module.exports = driverController;

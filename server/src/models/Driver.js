@@ -1,4 +1,4 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes, BOOLEAN } = require('sequelize');
 // Exportamos una funcion que define el modelo
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
@@ -31,7 +31,13 @@ module.exports = (sequelize) => {
       type: DataTypes.DATE,
       allowNull: false,
     },
-  });
+    created:{
+      type: BOOLEAN,
+      defaultValue: true,
+    }
+  },
+    { timestamps: false }
+  );
 
   return Driver;
 };
