@@ -1,9 +1,12 @@
 .card-container {
-    display: flex;
+    position: relative;
+    color: rgb(43, 43, 226);
     flex-direction: column;
-    background-color: #95dada;
-    border: 1px solid grey;
+    /* background-color: rgb(154, 163, 171); */
+    border: 1px ;
     border-radius: 5px;
+    border-top-right-radius: 100px;
+    border-bottom-left-radius: 100px ;
     padding: 25px;
     cursor: pointer;
     -moz-osx-font-smoothing: grayscale;
@@ -12,6 +15,50 @@
     transition: transform 0.25s ease-out;
 }
 
-.card-container:hover {
+.card-container h3{
+    font-size: medium;
+}
+
+.card-container h5{
+    font-size: smaller;
+}
+
+.imgContainer {
+    border-top-left-radius: 100px;
+    border-bottom-right-radius: 100px ;
+    position: relative;
+    width: 100%;
+    /* Ajusta el ancho del contenedor de imágenes */
+    height: 200px;
+    /* Ajusta la altura del contenedor de imágenes */
+    overflow: hidden;
+    /* Oculta cualquier parte de la imagen que se salga del contenedor */
+}
+
+.imgContainer img {
+    width: 100%;
+    /* Ajusta el tamaño de la imagen al contenedor */
+    height: 100%;
+    /* Ajusta el tamaño de la imagen al contenedor */
+    object-fit: cover;
+    /* Escala la imagen para que llene el contenedor sin distorsionar */
+}
+
+
+.container:hover {
+    position: relative;
     transform: scale(1.05);
+    z-index: 1;
+    
+    /* Asegura que la imagen en zoom esté encima de otras cartas */
+}
+
+
+
+.divOrigenGenero {
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
 }

@@ -4,7 +4,7 @@ function Navbar({ handleChange, handleSubmit }) {
 
 
   return (
-    <div className='search-box' >
+    <div className='nav' >
       <form onChange={handleChange} >
         <input
           placeholder='Busqueda'

@@ -1,9 +1,11 @@
-.search-box {
-    border: none;
-    outline: none;
-    padding: 10px;
-    width: 150px•;
-    line-height: 30px;
-    margin-bottom: 30px;
+.nav {
 
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+    margin-bottom: 20px;
+    margin-top: -30px;
+    margin-left: 975px;
 }

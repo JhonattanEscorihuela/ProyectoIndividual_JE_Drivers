@@ -38,7 +38,6 @@ function Home() {
 
   return (
     <div className="home" >
-      <h2 className='home-title'>Home</h2>
       <Navbar handleChange={handleChange} handleSubmit={handleSubmit} />
       <Cards allDrivers={allDrivers} />
     </div>
