@@ -106,6 +106,7 @@ let driverController = {
                 imagen,
                 nacionalidad,
                 fecha_de_nacimiento,
+                
             });
     
             if (teams) {

@@ -8,7 +8,7 @@ function Cards({ allDrivers }) {
   let itemsPerPage = 9;
   let [currentPage, setCurrentPage] = useState(1);
 
-
+  
 
   let indexOfLastItem = currentPage * itemsPerPage;
   let indexOfFirstItem = indexOfLastItem - itemsPerPage;

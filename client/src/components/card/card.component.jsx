@@ -3,7 +3,7 @@ import './card.styles.css'
 
 function Card({ id, referencia, nombre, apellido, imagen, nacionalidad, teams }) {
 
-
+  
 
   return (
 

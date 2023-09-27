@@ -1,4 +1,4 @@
-import { GET_DRIVERS, GET_BY_NAME, GET_BY_ID } from "../actions";
+import { GET_DRIVERS, GET_BY_NAME, GET_BY_ID, CREATE_DRIVER, GET_TEAMS } from "../actions";
 
 
 
@@ -27,9 +27,21 @@ function rootReducer(state = initialState, { type, payload }) {
                 ...state,
                 allDrivers: payload,
             };
+        case CREATE_DRIVER:
+            return {
+                ...state,
+                allDrivers: [...state.allDrivers, payload],
+            };
+        case GET_TEAMS:
+            return {
+                ...state,
+                teams: payload,
+            };
         default:
             return { ...state }
     }
 }
+
+
 
 export default rootReducer;

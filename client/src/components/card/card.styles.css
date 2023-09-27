@@ -1,8 +1,8 @@
 .card-container {
     position: relative;
-    color: rgb(43, 43, 226);
+    color: rgb(255, 255, 255);
     flex-direction: column;
-    /* background-color: rgb(154, 163, 171); */
+    /* background-color: rgb(255, 255, 255); */
     border: 1px ;
     border-radius: 5px;
     border-top-right-radius: 100px;
@@ -13,6 +13,7 @@
     backface-visibility: hidden;
     transform: translateZ(0);
     transition: transform 0.25s ease-out;
+    font-family: roboto;
 }
 
 .card-container h3{
