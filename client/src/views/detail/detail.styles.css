@@ -1,0 +1,50 @@
+.detail-container {
+    display: flex;
+    max-width: 100%;
+    /* Ancho máximo del contenedor principal */
+    margin: 0 auto;
+    color: white;
+}
+
+.detail-content {
+    display: flex;
+    width: 100%;
+    
+}
+
+/* Estilo para la sección de información del conductor */
+.detail-info {
+    flex: 1;
+    padding: 20px;
+    border-right: 1px solid #ddd;
+    /* Línea divisora */
+    box-sizing: border-box;
+    
+}
+
+/* Estilo para la imagen */
+.detail-image {
+    flex: 1;
+    text-align: center;
+    padding: 20px;
+    max-width: 100%;
+    /* Ajusta la imagen al ancho máximo del contenedor */
+    height: auto;
+    /* Mantiene la proporción original de la imagen */
+}
+
+/* Estilo para el botón "Saber más" */
+.detail-more-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.detail-more-button:hover {
+    background-color: #0056b3;
+}

@@ -17,8 +17,6 @@ function Home() {
   let [searchString, setSearchString] = useState("");
   
 
-  //* Filtro con el BackEnd
-
   function handleChange(e) {
     e.preventDefault();
     setSearchString(e.target.value);

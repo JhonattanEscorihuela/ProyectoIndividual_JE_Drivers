@@ -1,0 +1,58 @@
+.create-driver-container {
+    color: rgb(0, 4, 255);
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-image: url('https://img.redbull.com/images/c_fill,w_520,h_580,g_auto,f_auto,q_auto/redbullcom/2023/3/2/xkzkxkggsonoqwatpgdj/rbr-driverlayer-max');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+/* Estilo para el título del formulario */
+.create-driver-title {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Estilo para los campos de entrada de texto */
+.create-driver-input {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+/* Estilo para el campo de selección múltiple */
+.create-driver-select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    height: 100px;
+    /* Ajusta la altura según tus preferencias */
+}
+
+/* Estilo para el botón de enviar */
+.create-driver-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+/* Estilo para el botón de enviar al pasar el cursor */
+.create-driver-button:hover {
+    background-color: #0056b3;
+}

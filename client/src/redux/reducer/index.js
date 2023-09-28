@@ -4,6 +4,7 @@ import { GET_DRIVERS, GET_BY_NAME, GET_BY_ID, CREATE_DRIVER, GET_TEAMS } from ".
 
 let initialState = {
     allDrivers: [],
+    driverById:[],
     driversCopy: [],
     myFavorites: [],
     posts: [],
@@ -25,7 +26,7 @@ function rootReducer(state = initialState, { type, payload }) {
         case GET_BY_ID:
             return {
                 ...state,
-                allDrivers: payload,
+                driverById: payload,
             };
         case CREATE_DRIVER:
             return {

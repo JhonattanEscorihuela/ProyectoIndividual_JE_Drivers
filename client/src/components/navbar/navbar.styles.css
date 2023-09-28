@@ -1,5 +1,4 @@
 .nav {
-
     border-radius: 10px;
     display: flex;
     justify-content: space-between;
@@ -7,5 +6,19 @@
     padding: 10px 30px;
     margin-bottom: 20px;
     margin-top: -30px;
-    margin-left: 975px;
+    margin-left: 950px;
+}
+
+.search-driver-button {
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: -5px;
+    padding: 5px 10px;
+    font-size: 0.8rem;
+}
+
+.search-driver-button:hover {
+    background-color: #0056b3;
 }

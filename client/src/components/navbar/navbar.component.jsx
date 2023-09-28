@@ -10,6 +10,7 @@ function Navbar({ handleChange, handleSubmit }) {
           placeholder='Busqueda'
           type='search' />
         <button
+          className="search-driver-button"
           type='submit'
           onClick={handleSubmit}>
           Buscar

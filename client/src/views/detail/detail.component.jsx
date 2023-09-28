@@ -2,34 +2,57 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { getById } from '../../redux/actions';
 import { useParams } from 'react-router-dom';
-
-import './detail.styles.css'
+import './detail.styles.css';
+import React, { useState } from 'react';
 
 
 function Detail() {
-  const { id } = useParams();
-
+  let { id } = useParams();
+  let [expanded, setExpanded] = useState(false); // Estado para controlar la expansión de la descripción
+  let driver = useSelector((state) => state.driverById);
   let dispatch = useDispatch();
-  let driver = useSelector((state) => state.allDrivers);
-  driver = driver[0];
-  
 
+  if (isNaN(id)) {
+    driver = [driver];
+  }
 
   useEffect(() => {
-    dispatch(getById(id))
-  }, [id, dispatch])
+    dispatch(getById(id));
+  }, [id, dispatch]);
 
+  // Función para manejar el clic en el botón "Saber más"
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
 
   return (
-    <>
-      <p>Estas en el Detail</p>
-      <div>
-        <h2>Detalles del Conductor</h2>
-        <p>Nombre:{driver.nombre} </p>
-        
-      </div>
-    </>
-  )
+    <div className="detail-container">
+      {driver?.map((driv) => (
+        <div key={driv.id || parseInt(driv.driver_id)} className="detail-content">
+          <div className="detail-info">
+            <h2>Id: {driv.id || driv.driver_id}</h2>
+            <h2>Nombre: {driv.nombre}</h2>
+            <h2>Apellido: {driv.apellido}</h2>
+            <h2>Nacionalidad: {driv.nacionalidad}</h2>
+            <h2>Fecha de Nacimiento: {driv.fecha_de_nacimiento}</h2>
+            <h2>Escuderías: {driv.teams}</h2>
+            {/* Controla la visibilidad de la descripción en función del estado "expanded" */}
+            <p>{expanded ? driv.descripcion : driv.descripcion?.slice(0, 200) + '...'}</p>
+            {/* Muestra el botón "Saber más" si la descripción está recortada */}
+            {driv.descripcion?.length > 200 && (
+              <button className="detail-more-button" onClick={handleExpandClick}>
+                {expanded ? 'Leer menos' : 'Saber más'}
+              </button>
+            )}
+          </div>
+
+          <div className="detail-image">
+            <img src={driv.imagen} alt="Driver" />
+          </div>
+        </div>
+      ))}
+    </div>
+  );
 }
 
-export default Detail
+export default Detail;
