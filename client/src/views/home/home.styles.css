@@ -1,5 +1,5 @@
 body {
-    margin: O;
+    margin: 0;
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
         "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
@@ -9,8 +9,10 @@ body {
             rgb(25, 45, 64) 0%,
             rgb(13, 34, 53) 50%,
             rgb(1, 23, 44) 100%);
-    /* Azul */
     text-align: center;
+    
+
+    
 }
 
 .home-title {
@@ -25,5 +27,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    
-}
+
+}   
+

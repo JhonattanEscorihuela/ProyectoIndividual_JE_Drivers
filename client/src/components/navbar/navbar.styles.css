@@ -22,3 +22,12 @@
 .search-driver-button:hover {
     background-color: #0056b3;
 }
+
+.navDrivers {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1px 1px;
+    margin-bottom: 20px;
+    margin-top: -5px;
+}

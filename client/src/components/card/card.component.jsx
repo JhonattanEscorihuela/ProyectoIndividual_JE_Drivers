@@ -9,7 +9,7 @@ function Card({ id, referencia, nombre, apellido, imagen, nacionalidad, teams })
 
     <div className='container' >
       <div className='imgContainer'>
-        <img src={imagen} alt={nombre} />
+        <img src={imagen} alt={nombre}  />
 
 
       </div>

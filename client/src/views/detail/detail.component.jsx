@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { getById } from '../../redux/actions';
-import { useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import './detail.styles.css';
 import React, { useState } from 'react';
 
@@ -27,6 +27,9 @@ function Detail() {
 
   return (
     <div className="detail-container">
+      <NavLink to={'/drivers'} >
+          <span>Drivers</span>
+        </NavLink>
       {driver?.map((driv) => (
         <div key={driv.id || parseInt(driv.driver_id)} className="detail-content">
           <div className="detail-info">
@@ -47,7 +50,7 @@ function Detail() {
           </div>
 
           <div className="detail-image">
-            <img src={driv.imagen} alt="Driver" />
+            <img src={driv.imagen} alt="Driver" width={500} height={500} />
           </div>
         </div>
       ))}

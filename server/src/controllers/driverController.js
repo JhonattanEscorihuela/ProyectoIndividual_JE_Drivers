@@ -2,6 +2,8 @@ let axios = require("axios");
 let url = "http://localhost:5000/drivers/";
 let imagenPorDefecto = "https://img.redbull.com/images/c_fill,w_520,h_580,g_auto,f_auto,q_auto/redbullcom/2023/3/2/hxtnynke2onx5c3lvwnb/rbr-driverlayer-sergio.jpg";
 
+
+
 let { Driver, Team } = require('../db.js');
 const { Op } = require("sequelize");
 
@@ -106,7 +108,7 @@ let driverController = {
                 imagen,
                 nacionalidad,
                 fecha_de_nacimiento,
-                
+                teams,
             });
     
             if (teams) {
