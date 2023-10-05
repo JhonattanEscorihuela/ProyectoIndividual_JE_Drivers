@@ -34,7 +34,7 @@ let infoCleaner = (arr) => {
 let driverController = {
     getAllDrivers: async (req, res) => {
         try {
-            let dbDrivers = await Driver.findAll();
+            let dbDrivers = await Driver.findAll({ include: Team });
             let apiDrivers = await axios.get(url);
 
             apiDrivers = infoCleaner(apiDrivers.data);
@@ -56,7 +56,7 @@ let driverController = {
                 apiDriver = infoCleaner([apiDriver.data]);
                 res.json(apiDriver);
             } else {
-                let driver = await Driver.findByPk(idDriver);
+                let driver = await Driver.findByPk({ where: { driver_id: idDriver }, include: Team });
                 res.status(200).json(driver);
             }
         } catch (error) {
@@ -108,23 +108,23 @@ let driverController = {
                 imagen,
                 nacionalidad,
                 fecha_de_nacimiento,
-                teams,
+
             });
-    
+
             if (teams) {
                 const teamUUID = await findTeamByName(teams);
                 if (teamUUID) {
                     await nuevoDriver.addTeams([teamUUID]);
                 }
             }
-    
+
             res.status(201).json(nuevoDriver);
         } catch (error) {
             console.error(error);
             res.status(500).json({ error: 'Hubo un error al crear el driver.' });
         }
     }
-    
+
 }
 
 module.exports = driverController;

@@ -8,8 +8,6 @@ function Cards({ allDrivers }) {
   let itemsPerPage = 9;
   let [currentPage, setCurrentPage] = useState(1);
 
-  
-
   let indexOfLastItem = currentPage * itemsPerPage;
   let indexOfFirstItem = indexOfLastItem - itemsPerPage;
   let currentDrivers = allDrivers?.slice(indexOfFirstItem, indexOfLastItem);
@@ -19,7 +17,8 @@ function Cards({ allDrivers }) {
     setCurrentPage(pageNumber);
   };
 
-  // Limita la cantidad de números de página a mostrar
+ 
+
   const maxPageNumbersToShow = 5; // Puedes ajustar esto según tus necesidades
   const halfMaxPageNumbersToShow = Math.floor(maxPageNumbersToShow / 2);
   const startPage = Math.max(currentPage - halfMaxPageNumbersToShow, 1);
@@ -33,6 +32,7 @@ function Cards({ allDrivers }) {
     setCurrentPage(totalPages);
   };
 
+  console.log(allDrivers);
 
   return (
     <div>
@@ -42,16 +42,16 @@ function Cards({ allDrivers }) {
         ))}
 
       </div>
-      <div>
-        <button onClick={goToFirstPage}>Inicio</button>
+      <div  >
+        <button className='search-driver-button' onClick={goToFirstPage}>Inicio</button>
         
         {Array.from({ length: endPage - startPage + 1 }, (_, index) => (
-          <button key={index} onClick={() => handlePageChange(startPage + index)}>
+          <button key={index} onClick={() => handlePageChange(startPage + index)} className='search-driver-button' >
             {startPage + index}
           </button>
         ))}
         
-        <button onClick={goToLastPage}>Fin</button>
+        <button className='search-driver-button' onClick={goToLastPage}>Fin</button>
       </div>
     </div>
   )

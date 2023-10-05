@@ -25,6 +25,8 @@ function Detail() {
     setExpanded(!expanded);
   };
 
+  
+
   return (
     <div className="detail-container">
       <NavLink to={'/drivers'} >
