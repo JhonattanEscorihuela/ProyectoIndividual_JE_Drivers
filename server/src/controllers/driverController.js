@@ -37,6 +37,7 @@ let driverController = {
             let dbDrivers = await Driver.findAll({ include: Team });
             let apiDrivers = await axios.get(url);
 
+            
             apiDrivers = infoCleaner(apiDrivers.data);
             driversApiDB = [...apiDrivers, ...dbDrivers]
 
