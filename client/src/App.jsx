@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 
@@ -29,14 +29,14 @@ function App() {
       setAccess(true)
       navigate('/create')
       navigate('/drivers')
-      
+
     }
     else alert('Usuario o contraseña incorrecta')
   }
 
   useEffect(() => {
     !access && navigate('/');
-  }, [access]);
+  }, [access, navigate]);
 
   return (
     <>
